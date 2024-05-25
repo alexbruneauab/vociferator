@@ -21,7 +21,7 @@ print(f"Using {device} device")
 #Define Hyperparameters
 learning_rate = 1e-3
 batch_size = 64
-epochs = 5
+epochs = 1
 
 #Load the neural network into the model
 model = NeuralNetwork().to(device)
@@ -78,9 +78,9 @@ for t in range(epochs):
 print("Training Done!")
 
 print("Saving model...")
-torch.save(model, 'model.pth')
+torch.save(model, 'tutorial_pytorch_qs/model.pth')
 print("Model saved.")
 
 print("Saving state dictionary...")
-torch.save(model.state_dict(), "model_dict.pth")
+torch.save(model.state_dict(), "tutorial_pytorch_qs/model_dict.pth")
 print("State dictionary saved.")

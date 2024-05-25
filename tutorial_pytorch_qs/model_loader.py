@@ -13,12 +13,12 @@ device = (
 )
 print(f"Using {device} device")
 
-#Creating a new model based on the existing nn and load the model's dictionnary
-model = NeuralNetwork().to(device)
-model.load_state_dict(torch.load("model_dict.pth"))
+# #Creating a new model based on the existing nn and load the model's dictionnary
+# model = NeuralNetwork().to(device)
+# model.load_state_dict(torch.load("tutorial_pytorch_qs/model_dict.pth"))
 
-# #Load the entire model
-# model = torch.load('model.pth')
+#Load the entire model
+model = torch.load('tutorial_pytorch_qs/model.pth')
 
 classes = [
     "T-shirt/top",
