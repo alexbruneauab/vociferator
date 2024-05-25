@@ -1,1 +1,1 @@
-https://medium.com/@gpj/making-your-ai-sound-like-you-a-guide-to-creating-custom-text-to-speech-8b595d5cf259
+https://medium.com/@zahrizhalali/crafting-your-custom-text-to-speech-model-f151b0c9cba2
