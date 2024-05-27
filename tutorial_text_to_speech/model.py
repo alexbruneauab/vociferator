@@ -10,10 +10,11 @@ from TTS.tts.utils.speakers import SpeakerManager
 from TTS.tts.utils.text.tokenizer import TTSTokenizer
 from TTS.utils.audio import AudioProcessor
 
+data_path = "/home/py-projects/vociferator/data/LJSpeech/"
 output_path = "/home/py-projects/vociferator/data/output"
 
 dataset_config = BaseDatasetConfig(
-    formatter="ljspeech", meta_file_train="metadata.csv", path="/home/py-projects/vociferator/data/LJSpeech/"
+    formatter="ljspeech", meta_file_train="metadata.csv", path=data_path
 )
 
 #Change sample_rate depending on the output of the wav files
@@ -24,7 +25,7 @@ audio_config = VitsAudioConfig(
 character_config = CharactersConfig(
     characters_class= "TTS.tts.models.vits.VitsCharacters",
     characters= "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890",
-    punctuations=" !,.?-",
+    punctuations=" !,.?-;:'()[]|_`~@#$%^&*<>+=/\\{}\"",
     pad= "<PAD>",
     eos= "<EOS>",
     bos= "<BOS>",
@@ -35,13 +36,13 @@ config = VitsConfig(
     audio=audio_config,
     characters=character_config,
     run_name="vits_vctk",
-    batch_size=32, #Change this depending on available ram, values of 8, 16, 32 or 64 are common
-    eval_batch_size=8, #Change this depending on available ram, values of 4, 8, 16, 32 or 64 are common
-    num_loader_workers=4,
-    num_eval_loader_workers=4,
+    batch_size=16, #Change this depending on available ram, values of 8, 16, 32 or 64 are common
+    eval_batch_size=4, #Change this depending on available ram, values of 4, 8, 16, 32 or 64 are common
+    num_loader_workers=2, #If not enough memory, can be reduced to 2 instead of 4
+    num_eval_loader_workers=2, #If not enough memory, can be reduced to 2 instead of 4
     run_eval=True,
     test_delay_epochs=0,
-    epochs=1000,
+    epochs=500, #was 1000 in the beginning
     text_cleaner="basic_cleaners",
     use_phonemes=False,
     phoneme_language="en-us",
@@ -82,7 +83,7 @@ def formatter(root_path, manifest_file, **kwargs):  # pylint: disable=unused-arg
     with open(txt_file, "r", encoding="utf-8") as ttf:
         for line in ttf:
             cols = line.split("|")
-            wav_file = f"../data/LJSpeech/wavs/{cols[0]}.wav"
+            wav_file = f"{data_path}wavs/{cols[0]}.wav"
             text = cols[1]
             # print(text)
             items.append({"text":text, "audio_file":wav_file, "speaker_name":speaker_name, "root_path": root_path})
