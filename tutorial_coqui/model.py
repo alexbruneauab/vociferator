@@ -17,6 +17,9 @@ from TTS.utils.audio import AudioProcessor
 # we use the same path as this script as our training folder.
 output_path = "/home/py-projects/vociferator/data/"
 
+#Use this line to download the dataset if you don't have it already
+#torchaudio.datasets.LJSPEECH(root="/home/py-projects/vociferator/data/",download = True)
+
 # DEFINE DATASET CONFIG
 # Set LJSpeech as our target dataset and define its path.
 # You can also use a simple Dict to define the dataset and pass it to your custom formatter.
